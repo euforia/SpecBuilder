@@ -1,0 +1,19 @@
+{
+	"Name": "",
+	"Version":"",
+	"Release": "0",
+	"Summary": "",
+	"License": "GPL",
+	"Group": "Development/Tools",
+	"Sources": [""],
+	"BuildRoot": "%{_tmppath}/%{name}-%{version}-build",
+	"BuildRequires": "",
+	"Requires": "",
+	"description": "",
+	"prep": "%setup -q -n %{name}-%{version}",
+	"build": "",
+	"install": "",
+	"clean": "rm -rf %{buildroot}",
+	"files": "%defattr(-,root,root,-)",
+	"changelog": ""
+}

@@ -1,0 +1,15 @@
+<div class="view-defaults">
+	<div>
+		<div class="input-group">
+			<input type="text" class="form-control" ng-model="searchQuery">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="packageSearch()">Search</button>
+			</span>
+		</div>
+	</div>
+	<div>
+		<div ng-repeat="result in searchResult">
+			<span>{{result.name}}</span><sub>{{result.version}}</sub>
+		</div>
+	</div>
+</div>

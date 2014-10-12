@@ -1,0 +1,142 @@
+<div class="view-defaults">
+	<ul class="nav nav-pills">
+		<li class="nav-btn">
+			<a ng-click="showPreview(this)">
+				<span class="glyphicon glyphicon-eye-open"></span>
+				<span class="nav-btn-label">Preview</span>
+			</a>
+		</li>
+		<li class="nav-btn">
+			<a ng-click="hidePreview(this)">
+				<span class="glyphicon glyphicon-edit"></span>
+				<span class="nav-btn-label">Edit</span>
+			</a>
+		</li>
+		<li class="nav-btn">
+			<a ng-click="downloadSpec()">
+				<span class="glyphicon glyphicon-download-alt"></span>
+				<span class="nav-btn-label">Download</span>
+			</a>
+		</li>
+	</ul>
+	<div id="builder-view">
+		<table class="table" id="spec-editor">
+			<tr>
+				<td>Name</td>
+				<td colspan="2"><input type="text" ng-model="spec.Name" class="form-control" placeholder="Required" required></td>
+			</tr>
+			<tr>
+				<td>Version</td>
+				<td colspan="2"><input type="text" ng-model="spec.Version" class="form-control" placeholder="Required" required></td>
+			</tr>
+			<tr>
+				<td>Release</td>
+				<td colspan="2"><input type="text" ng-init="0.1.0" ng-model="spec.Release" placeholder="Required" class="form-control" required></td>
+			</tr>
+			<tr>
+				<td>Summary</td>
+				<td colspan="2"><input type="text" ng-model="spec.Summary" class="form-control"></td>
+			</tr>
+			<tr>
+				<td>License</td>
+				<td colspan="2">
+					<select ng-model="spec.License">
+						<option ng-repeat="license in licenses">{{license}}</option>
+					</select>
+					<span class="caret"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>Group</td>
+				<td colspan="2">
+					<select ng-model="spec.Group">
+						<option ng-repeat="group in rpmGroups">{{group}}</option>
+					</select>
+					<span class="caret"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>Source0</td>
+				<td>
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="spec.Sources[0]" required>
+						<span class="input-group-addon" style="background:none;border:none">
+							<span class="glyphicon glyphicon-remove" style="opacity:0"></span>
+						</span>
+					</div>
+				</td>
+				<td rowspan="{{spec.Sources.length}}" style="vertical-align:middle;text-align:center">
+					<a id="source-adder" ng-click="spec.Sources.push('')" style="color:#ccc"><span class="glyphicon glyphicon-plus"></span></a>
+				</td>
+			</tr>
+			<tr ng-repeat="source in spec.Sources track by $index" ng-if="$index>=1">
+				<td>Source{{$index}}</td>
+				<td>
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="source">
+						<span class="input-group-addon" style="background:none" ng-click="spec.Sources.splice($index,1)">
+							<span class="glyphicon glyphicon-remove"></span>
+						</span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>BuildRoot</td>
+				<td colspan="2"><input type="text" ng-model="spec.BuildRoot" class="form-control" code-block></td>
+			</tr>
+			<tr>
+				<td>BuildRequires</td>
+				<td colspan="2"><input type="text" class="form-control" placeholder="Space delimted" code-block></td>
+			</tr>
+			<tr>
+				<td>Requires</td>
+				<td colspan="2"><input type="text" class="form-control" placeholder="Space delimted" code-block></td>
+			</tr>
+			<tr>
+				<td>%description</td>
+				<td colspan="2">
+					<textarea ng-model="spec.description" class="rpmspec" auto-resize>{{ description }}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>%prep</td>
+				<td colspan="2">
+					<textarea ng-model="spec.prep" class="code-block rpmspec" auto-resize code-block>{{spec.prep}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>%build</td>
+				<td colspan="2">
+					<textarea ng-model="spec.build" class="code-block rpmspec" auto-resize code-block>{{spec.build}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>%install</td>
+				<td colspan="2">
+					<textarea ng-model="spec.install" class="code-block rpmspec" auto-resize code-block>{{spec.install}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>%clean</td>
+				<td colspan="2">
+					<textarea ng-model="spec.clean" class="code-block rpmspec" auto-resize code-block>{{spec.clean}}</textarea>
+				</td>
+			</tr>	
+			<tr>
+				<td>%files</td>
+				<td colspan="2">
+					<textarea ng-model="spec.files" class="code-block rpmspec" auto-resize code-block>{{spec.files}}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>%changelog</td>
+				<td colspan="2">
+					<textarea ng-model="spec.changelog" class="code-block rpmspec" auto-resize>{{spec.changelog}}</textarea>
+				</td>
+			</tr>
+		</table>
+		<div id="spec-preview-container" style="display:none">
+			<ng-include src="rpmSpecHtml"></ng-include>
+		</div>
+	</div>
+</div>

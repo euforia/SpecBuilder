@@ -1,0 +1,39 @@
+<pre id="rpm-spec-data" class="spec-data">
+#
+# spec file for package {{ spec.Name }}
+#
+# Copyright (c) {{ year }} {{ user_name }}.
+#
+
+Name            : {{ spec.Name }}
+Version         : {{ spec.Version }}
+Release         : {{ spec.Release }}
+Summary         : {{ spec.Summary }}
+License         : {{ spec.License }}
+Group           : {{ spec.Group }}
+{{ spec.Sources|rpmSources }}
+BuildRoot       : {{ spec.BuildRoot }}
+BuildRequires   : {{ spec.BuildRequires }} 
+Requires        : {{ spec.Requires }}
+
+%description
+{{ spec.description }}
+
+%prep
+{{ spec.prep }}
+
+%build
+{{ spec.build }}
+
+%install
+{{ spec.install }}
+
+%clean
+{{ spec.clean }}
+
+%files
+{{ spec.files }}
+
+%changelog
+{{ spec.changelog }}
+</pre>
